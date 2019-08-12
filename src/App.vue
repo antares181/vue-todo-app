@@ -18,10 +18,10 @@
   color: #2c3e50;
   padding: 60px 0;
   /* background: #4aa3ff; */
-  background: rgb(187, 112, 230);
+  background: rgb(112, 230, 132);
   background: linear-gradient(
-    48deg,
-    rgba(187, 112, 230, 1) 3%,
+    215deg,
+    rgba(112, 230, 132, 1) 3%,
     rgba(0, 206, 255, 1) 100%
   );
   min-height: 100vh;

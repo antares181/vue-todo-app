@@ -14,9 +14,10 @@ Vue.use(Vuex);
  * Jadi sederhanya vuex merupakan sebuah state management pattern pada vuejs
  * yg mana tugasnya sebagai centralized store untuk semua component dalam aplikasi vuejs yg akan kita buat.
  *
- *
- * source: https://ngide.net/posts/kenalan-dengan-vuex-state-management-di-vue-js
- *
+ * use full source:
+ * https://ngide.net/posts/kenalan-dengan-vuex-state-management-di-vue-js
+ * https://vuex.vuejs.org/
+ * https://scrimba.com/g/gvuex
  */
 
 export default new Vuex.Store({

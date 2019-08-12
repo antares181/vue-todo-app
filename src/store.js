@@ -31,8 +31,7 @@ export default new Vuex.Store({
     todos: [],
     isNewForm: false,
     isUpdateForm: false,
-    item: {},
-    itemTemp: {}
+    item: {}
   },
   /*
    * 2. Action
@@ -44,6 +43,7 @@ export default new Vuex.Store({
    * untuk merubah state. Misalnya saat selesai melakukan request ajax.
    */
   actions: {
+    // aksi untuk men-set data todos
     GET_TODO: context => {
       const todos = [
         {
@@ -73,13 +73,16 @@ export default new Vuex.Store({
       ];
       context.commit("SET_TODO", todos);
     },
+    // aksi untuk membuka component form penambahan baru
     NEW_TODO: context => {
       context.commit("OPEN_NEW_TODO");
     },
+    // aksi untuk membuka component form ubah item dan menampung data yang dipilih ke state sementara
     UPDATE_TODO: (context, payload) => {
       context.commit("OPEN_UPDATE_TODO");
       context.commit("SET_DATA_UPDATE", payload);
     },
+    // aksi untuk menambah item baru
     SUBMIT_TODO: (context, payload) => {
       let date = new Date();
       const newData = {
@@ -91,13 +94,16 @@ export default new Vuex.Store({
       context.commit("CLOSE_NEW_TODO");
       context.commit("SAVE_TODO", newData);
     },
+    // aksi untuk menyimpan item yang diubah
     STORE_TODO: (context, payload) => {
       context.commit("STORE_DATA_TODO", payload);
       context.commit("CLOSE_UPDATE_TODO");
     },
+    // aksi untuk mengganti status done/not-done
     CHECK_ITEM: (context, payload) => {
       context.commit("CHECK_ITEM", payload);
     },
+    // aksi untuk menhapus item yang dipilih
     DELETE_ITEM: (context, payload) => {
       context.commit("DELETE_ITEM", payload.id);
     }
@@ -112,30 +118,37 @@ export default new Vuex.Store({
     SET_TODO: (state, payload) => {
       state.todos = payload;
     },
+    // show component tambah item
     OPEN_NEW_TODO: state => {
       state.isNewForm = true;
     },
+    // show component ubah item
     OPEN_UPDATE_TODO: state => {
       state.isUpdateForm = true;
     },
+    // hidden component tambah item
     CLOSE_NEW_TODO: state => {
       state.isNewForm = false;
     },
+    // hidden component ubah item
     CLOSE_UPDATE_TODO: state => {
       state.isUpdateForm = false;
     },
+    // simpan data yang ingin diupdate ke state item
     SET_DATA_UPDATE: (state, payload) => {
       state.item = payload;
-      state.itemTemp = payload;
     },
+    // push data baru ke state.todos
     SAVE_TODO: (state, payload) => {
       state.todos.push(payload);
     },
+    // menyimpan data setelah selesai diubah
     STORE_DATA_TODO: (state, payload) => {
       state.todos.map(el => {
         if (el.id == payload.id) return { ...el, ...payload };
       });
     },
+    // mengganti cek item done/not done
     CHECK_ITEM: (state, payload) => {
       state.todos.map(el => {
         if (el.id == payload.id) {
@@ -144,6 +157,7 @@ export default new Vuex.Store({
         }
       });
     },
+    // menghapus item yang dipilih
     DELETE_ITEM: (state, payload) => {
       state.todos = state.todos.filter(el => {
         return el.id !== payload;
@@ -157,8 +171,11 @@ export default new Vuex.Store({
    *
    */
   getters: {
+    // gettter all data todo
     todos: state => state.todos,
+    // getters indikator show form tambah
     isNewForm: state => state.isNewForm,
+    // getters indikator show form ubah
     isUpdateForm: state => state.isUpdateForm
   }
 });
